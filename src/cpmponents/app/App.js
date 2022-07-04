@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Header from '../header';
 import ItemList from '../itemList';
 import RandomPlanet from '../randomPlanet';
