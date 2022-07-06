@@ -7,8 +7,6 @@ import ErrorIndicator from '../errorIndicator/ErrorIndicator';
 import './RandomPlanet.css';
 
 const RandomPlanet = () => {
-    const id = Math.floor(Math.random() * 18) + 2;
-
     const swapiService = new SwapiService();
 
     const [planet, setPlanet] = useState({});
@@ -25,7 +23,13 @@ const RandomPlanet = () => {
         setIsLoading(false);
     };
 
+    const getRandom = () => {
+        return Math.floor(Math.random() * 20);
+    };
+
     const updatePlanet = () => {
+        const id = getRandom();
+
         swapiService
             .getPlanet(id)
             .then(onPlanetLoaded)
@@ -40,18 +44,29 @@ const RandomPlanet = () => {
         <div className="random-planet jumbotron rounded">
             {isLoading ? <Spinner /> : null}
             {isError ? <ErrorIndicator /> : null}
-            {!(isLoading || isError) ? <PlanetView planet={planet} id={id} /> : null}
+            {
+                !(isLoading || isError) ?
+                    <PlanetView
+                        planet={planet}
+                        id={planet.id}
+                        updatePlanet={updatePlanet}
+                    /> :
+                    null
+            }
         </div>
     );
 }
 
-const PlanetView = ({ planet, id }) => {
+const PlanetView = ({ planet, id, updatePlanet }) => {
     const { name, population, rotationPeriod, diameter } = planet;
 
     return (
         <>
-            <img className="planet-image"
-                src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} />
+            <img
+                className="planet-image"
+                src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+                onClick={updatePlanet}
+            />
             <div>
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">

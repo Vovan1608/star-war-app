@@ -8,7 +8,7 @@ import PersonDetails from '../personDetails';
 import './App.css';
 
 const App = () => {
-    const [selectedPerson, setSelectedPerson] = useState(0);
+    const [selectedPerson, setSelectedPerson] = useState(1);
 
     const onPersonSelected = (id) => {
         setSelectedPerson(id);

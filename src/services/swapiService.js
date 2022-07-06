@@ -102,8 +102,8 @@ export default class SwapiService {
         url,
         name,
         gender,
-        birthYear,
-        eyeColor
+        eye_color,
+        birth_year
     }) => {
         const id = this._extractId(url);
 
@@ -111,8 +111,8 @@ export default class SwapiService {
             id,
             name,
             gender,
-            eyeColor,
-            birthYear
+            eyeColor: eye_color,
+            birthYear: birth_year
         };
     }
 }
