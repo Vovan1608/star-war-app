@@ -15,13 +15,13 @@ const RandomPlanet = () => {
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
-    const onPlanetLoaded = (planet) => {
-        setPlanet({ ...planet });
+    const onError = () => {
+        setIsError(true);
         setIsLoading(false);
     };
 
-    const onError = () => {
-        setIsError(true);
+    const onPlanetLoaded = (planet) => {
+        setPlanet({ ...planet });
         setIsLoading(false);
     };
 
@@ -38,8 +38,8 @@ const RandomPlanet = () => {
 
     return (
         <div className="random-planet jumbotron rounded">
-            {isError ? <ErrorIndicator /> : null}
             {isLoading ? <Spinner /> : null}
+            {isError ? <ErrorIndicator /> : null}
             {!(isLoading || isError) ? <PlanetView planet={planet} id={id} /> : null}
         </div>
     );

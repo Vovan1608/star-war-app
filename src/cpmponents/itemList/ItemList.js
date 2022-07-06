@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import Spinner from '../spinner/Spinner';
 import SwapiService from '../../services/swapiService';
+import ErrorIndicator from '../errorIndicator/ErrorIndicator';
 
 import './ItemList.css';
 
@@ -12,13 +13,25 @@ const ItemList = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [peopleList, setPeopleList] = useState([]);
 
-    useEffect(() => {
+    const onError = () => {
+        setIsError(true);
+        setIsLoading(false);
+    };
+
+    const onPeopleLoaded = (peopleList) => {
+        setPeopleList(peopleList);
+        setIsLoading(false);
+    };
+
+    const updatePeople = () => {
         swapiService
             .getAllPeople()
-            .then((peopleList) => {
-                setPeopleList(peopleList);
-            })
+            .then(onPeopleLoaded)
             .catch(onError);
+    };
+
+    useEffect(() => {
+        updatePeople();
     }, []);
 
     const renderItems = (persons) => {
@@ -35,16 +48,13 @@ const ItemList = () => {
         });
     };
 
-    const onError = () => {
-        setIsError(true);
-    };
-
     const persons = renderItems(peopleList);
 
     return (
         <ul className="item-list list-group">
-            {!peopleList ? <Spinner /> : null}
-            {persons}
+            {isLoading ? <Spinner /> : null}
+            {isError ? <ErrorIndicator /> : null}
+            {!(isLoading || isError) ? persons : null}
         </ul>
     );
 }
