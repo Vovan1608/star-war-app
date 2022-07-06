@@ -1,6 +1,6 @@
 import './PersonDetails.css';
 
-const PersonDetails = () => {
+const PersonDetails = ({ personId }) => {
     return (
         <div className="person-details card">
             <img className="person-image"

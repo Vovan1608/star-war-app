@@ -6,7 +6,7 @@ import ErrorIndicator from '../errorIndicator/ErrorIndicator';
 
 import './ItemList.css';
 
-const ItemList = () => {
+const ItemList = ({ onPersonSelected }) => {
     const swapiService = new SwapiService();
 
     const [isError, setIsError] = useState(false);
@@ -40,7 +40,7 @@ const ItemList = () => {
                 <li
                     key={id}
                     className="list-group-item"
-                    onClick={() => console.log(id)}
+                    onClick={() => onPersonSelected(id)}
                 >
                     {name}
                 </li>
