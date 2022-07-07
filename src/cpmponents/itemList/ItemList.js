@@ -5,7 +5,7 @@ import ErrorIndicator from '../errorIndicator/ErrorIndicator';
 
 import './ItemList.css';
 
-const ItemList = ({ onPersonSelected, getData }) => {
+const ItemList = ({ onPersonSelected, getData, renderItem }) => {
     const [isError, setIsError] = useState(false);
     const [itemList, setPeopleList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -30,15 +30,17 @@ const ItemList = ({ onPersonSelected, getData }) => {
         updatePeople();
     }, []);
 
-    const renderItems = (persons) => {
-        return persons.map(({ name, id }) => {
+    const renderItems = (arr) => {
+        return arr.map(({ id, ...item }) => {
+            const label = renderItem(item);
+
             return (
                 <li
                     key={id}
                     className="list-group-item"
                     onClick={() => onPersonSelected(id)}
                 >
-                    {name}
+                    {label}
                 </li>
             );
         });

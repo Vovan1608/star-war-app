@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Row from '../row';
 import Header from '../header';
 import ItemList from '../itemList';
 import RandomPlanet from '../randomPlanet';
@@ -17,20 +18,36 @@ const App = () => {
         setSelectedPerson(id);
     };
 
+    const itemList = (
+        <ItemList
+            onPersonSelected={onPersonSelected}
+            getData={swapiService.getAllPeople}
+            renderItem={
+                ({
+                    name,
+                    gender,
+                    birthYear
+                }) => `${name} (${gender} ${birthYear})`
+            }
+        />
+    );
+
+    const personDetails = <PersonDetails personId={selectedPerson} />;
+
     return (
         <div>
             <Header />
             <RandomPlanet />
 
+            <Row left={itemList} right={personDetails} />
+
             <div className="row mb2">
                 <div className="col-md-6">
                     <ItemList
                         onPersonSelected={onPersonSelected}
-                        getData={swapiService.getAllPeople}
+                        getData={swapiService.getAllPlanets}
+                        renderItem={({ name }) => name}
                     />
-                </div>
-                <div className="col-md-6">
-                    <PersonDetails personId={selectedPerson} />
                 </div>
             </div>
 
@@ -38,7 +55,8 @@ const App = () => {
                 <div className="col-md-6">
                     <ItemList
                         onPersonSelected={onPersonSelected}
-                        getData={swapiService.getAllPlanets}
+                        getData={swapiService.getAllStarships}
+                        renderItem={({ name }) => name}
                     />
                 </div>
             </div>
