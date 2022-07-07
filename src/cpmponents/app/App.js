@@ -22,14 +22,15 @@ const App = () => {
         <ItemList
             onPersonSelected={onPersonSelected}
             getData={swapiService.getAllPeople}
-            renderItem={
+        >
+            {
                 ({
                     name,
                     gender,
                     birthYear
                 }) => `${name} (${gender} ${birthYear})`
             }
-        />
+        </ItemList>
     );
 
     const personDetails = <PersonDetails personId={selectedPerson} />;
@@ -40,26 +41,6 @@ const App = () => {
             <RandomPlanet />
 
             <Row left={itemList} right={personDetails} />
-
-            <div className="row mb2">
-                <div className="col-md-6">
-                    <ItemList
-                        onPersonSelected={onPersonSelected}
-                        getData={swapiService.getAllPlanets}
-                        renderItem={({ name }) => name}
-                    />
-                </div>
-            </div>
-
-            <div className="row mb2">
-                <div className="col-md-6">
-                    <ItemList
-                        onPersonSelected={onPersonSelected}
-                        getData={swapiService.getAllStarships}
-                        renderItem={({ name }) => name}
-                    />
-                </div>
-            </div>
         </div>
     );
 };

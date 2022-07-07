@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import Spinner from '../spinner/Spinner';
-import ErrorIndicator from '../errorIndicator/ErrorIndicator';
+import Spinner from '../spinner';
+import ErrorBoundary from '../errorBoundary';
 
 import './ItemList.css';
 
-const ItemList = ({ onPersonSelected, getData, renderItem }) => {
+const ItemList = ({ onPersonSelected, getData, children }) => {
     const [isError, setIsError] = useState(false);
     const [itemList, setPeopleList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +32,7 @@ const ItemList = ({ onPersonSelected, getData, renderItem }) => {
 
     const renderItems = (arr) => {
         return arr.map(({ id, ...item }) => {
-            const label = renderItem(item);
+            const label = children(item);
 
             return (
                 <li
@@ -49,11 +49,12 @@ const ItemList = ({ onPersonSelected, getData, renderItem }) => {
     const persons = renderItems(itemList);
 
     return (
-        <ul className="item-list list-group">
-            {isLoading ? <Spinner /> : null}
-            {isError ? <ErrorIndicator /> : null}
-            {!(isLoading || isError) ? persons : null}
-        </ul>
+        <ErrorBoundary error={isError}>
+            <ul className="item-list list-group">
+                {isLoading ? <Spinner /> : null}
+                {!(isLoading || isError) ? persons : null}
+            </ul>
+        </ErrorBoundary>
     );
 }
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import Spinner from '../spinner/Spinner';
+import Spinner from '../spinner';
+import ErrorBoundary from '../errorBoundary';
 import SwapiService from '../../services/swapiService';
-import ErrorIndicator from '../errorIndicator/ErrorIndicator';
 
 import './RandomPlanet.css';
 
@@ -41,19 +41,20 @@ const RandomPlanet = () => {
     }, []);
 
     return (
-        <div className="random-planet jumbotron rounded">
-            {isLoading ? <Spinner /> : null}
-            {isError ? <ErrorIndicator /> : null}
-            {
-                !(isLoading || isError) ?
-                    <PlanetView
-                        planet={planet}
-                        id={planet.id}
-                        updatePlanet={updatePlanet}
-                    /> :
-                    null
-            }
-        </div>
+        <ErrorBoundary error={isError}>
+            <div className="random-planet jumbotron rounded">
+                {isLoading ? <Spinner /> : null}
+                {
+                    !(isLoading || isError) ?
+                        <PlanetView
+                            planet={planet}
+                            id={planet.id}
+                            updatePlanet={updatePlanet}
+                        /> :
+                        null
+                }
+            </div>
+        </ErrorBoundary>
     );
 }
 

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
-import Spinner from '../spinner/Spinner';
+import Spinner from '../spinner';
+import ErrorBoundary from '../errorBoundary';
 import SwapiService from '../../services/swapiService';
-import ErrorIndicator from '../errorIndicator/ErrorIndicator';
 
 import './PersonDetails.css';
 
@@ -39,11 +39,12 @@ const PersonDetails = ({ personId }) => {
     }, [personId]);
 
     return (
-        <div className="person-details card">
-            {isLoading ? <Spinner /> : null}
-            {isError ? <ErrorIndicator /> : null}
-            {!(isLoading || isError) ? <PersonView person={person} id={personId} /> : null}
-        </div>
+        <ErrorBoundary error={isError}>
+            <div className="person-details card">
+                {isLoading ? <Spinner /> : null}
+                {!(isLoading || isError) ? <PersonView person={person} id={personId} /> : null}
+            </div>
+        </ErrorBoundary>
     );
 }
 
