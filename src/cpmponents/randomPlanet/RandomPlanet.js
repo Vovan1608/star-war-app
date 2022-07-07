@@ -10,6 +10,7 @@ const RandomPlanet = () => {
     const swapiService = new SwapiService();
 
     const [planet, setPlanet] = useState({});
+    const [image, setImage] = useState('');
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -21,6 +22,8 @@ const RandomPlanet = () => {
     const onPlanetLoaded = (planet) => {
         setPlanet({ ...planet });
         setIsLoading(false);
+        setImage(swapiService.getPlanetImage(planet));
+        console.log(image);
     };
 
     const getRandom = () => {
@@ -47,8 +50,8 @@ const RandomPlanet = () => {
                     isLoading ?
                         <Spinner /> :
                         <PlanetView
+                            image={image}
                             planet={planet}
-                            id={planet.id}
                             updatePlanet={updatePlanet}
                         />
                 }
@@ -57,14 +60,14 @@ const RandomPlanet = () => {
     );
 }
 
-const PlanetView = ({ planet, id, updatePlanet }) => {
+const PlanetView = ({ planet, updatePlanet, image }) => {
     const { name, population, rotationPeriod, diameter } = planet;
 
     return (
         <>
             <img
+                src={image}
                 className="planet-image"
-                src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
                 onClick={updatePlanet}
             />
             <div>

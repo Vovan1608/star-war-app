@@ -4,13 +4,19 @@ import Row from '../row';
 import Header from '../header';
 import ItemList from '../itemList';
 import RandomPlanet from '../randomPlanet';
-import PersonDetails from '../personDetails';
+import ItemDetails from '../itemDetails';
 import SwapiService from '../../services/swapiService';
 
 import './App.css';
 
 const App = () => {
-    const swapiService = new SwapiService();
+    const {
+        getPersone,
+        getStarship,
+        getAllPeople,
+        getPersonImage,
+        getStarshipImage
+    } = new SwapiService();
 
     const [selectedPerson, setSelectedPerson] = useState(1);
 
@@ -21,7 +27,7 @@ const App = () => {
     const itemList = (
         <ItemList
             onPersonSelected={onPersonSelected}
-            getData={swapiService.getAllPeople}
+            getData={getAllPeople}
         >
             {
                 ({
@@ -33,7 +39,28 @@ const App = () => {
         </ItemList>
     );
 
-    const personDetails = <PersonDetails personId={selectedPerson} />;
+    const personDetails = (
+        <ItemDetails
+            itemId={selectedPerson}
+            getData={getPersone}
+            getImageUrl={getPersonImage}
+        />
+    );
+
+    const elevenPerson = (
+        <ItemDetails
+            itemId={11}
+            getData={getPersone}
+            getImageUrl={getPersonImage}
+        />
+    );
+    const starshipDetails = (
+        <ItemDetails
+            itemId={5}
+            getData={getStarship}
+            getImageUrl={getStarshipImage}
+        />
+    );
 
     return (
         <div>
@@ -41,6 +68,8 @@ const App = () => {
             <RandomPlanet />
 
             <Row left={itemList} right={personDetails} />
+
+            <Row left={elevenPerson} right={starshipDetails} />
         </div>
     );
 };

@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 
 import Spinner from '../spinner';
 import ErrorBoundary from '../errorBoundary';
-import SwapiService from '../../services/swapiService';
 
-import './PersonDetails.css';
+import './ItemDetails.css';
 
-const PersonDetails = ({ personId }) => {
-    const swapiService = new SwapiService();
-
-    const [person, setPerson] = useState({});
+const ItemDetails = ({ itemId, getData, getImageUrl }) => {
+    const [item, setItem] = useState({});
+    const [image, setImage] = useState('');
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -18,25 +16,25 @@ const PersonDetails = ({ personId }) => {
         setIsLoading(false);
     };
 
-    const onPersonLoaded = (person) => {
-        setPerson(person);
+    const onItemLoaded = (item) => {
+        setItem(item);
         setIsLoading(false);
+        setImage(getImageUrl(item));
     };
 
-    const updatePerson = () => {
-        if (!personId) {
+    const updateItem = () => {
+        if (!itemId) {
             return;
         }
 
-        swapiService
-            .getPersone(personId)
-            .then(onPersonLoaded)
+        getData(itemId)
+            .then(onItemLoaded)
             .catch(onError);
     };
 
     useEffect(() => {
-        updatePerson();
-    }, [personId]);
+        updateItem();
+    }, [itemId]);
 
     return (
         <ErrorBoundary error={isError}>
@@ -44,21 +42,21 @@ const PersonDetails = ({ personId }) => {
                 {
                     isLoading ?
                         <Spinner /> :
-                        <PersonView person={person} id={personId} />
+                        <ItemView item={item} image={image} />
                 }
             </div>
         </ErrorBoundary>
     );
 }
 
-const PersonView = ({ person, id }) => {
-    const { gender, birthYear, eyeColor, name } = person;
+const ItemView = ({ item, image }) => {
+    const { gender, birthYear, eyeColor, name } = item;
 
     return (
         <>
             <img
                 className="person-image"
-                src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+                src={image}
             />
 
             <div className="card-body">
@@ -82,4 +80,4 @@ const PersonView = ({ person, id }) => {
     );
 }
 
-export default PersonDetails;
+export default ItemDetails;
