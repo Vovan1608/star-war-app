@@ -41,8 +41,11 @@ const PersonDetails = ({ personId }) => {
     return (
         <ErrorBoundary error={isError}>
             <div className="person-details card">
-                {isLoading ? <Spinner /> : null}
-                {!(isLoading || isError) ? <PersonView person={person} id={personId} /> : null}
+                {
+                    isLoading ?
+                        <Spinner /> :
+                        <PersonView person={person} id={personId} />
+                }
             </div>
         </ErrorBoundary>
     );

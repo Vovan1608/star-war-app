@@ -51,8 +51,7 @@ const ItemList = ({ onPersonSelected, getData, children }) => {
     return (
         <ErrorBoundary error={isError}>
             <ul className="item-list list-group">
-                {isLoading ? <Spinner /> : null}
-                {!(isLoading || isError) ? persons : null}
+                {isLoading ? <Spinner /> : persons}
             </ul>
         </ErrorBoundary>
     );

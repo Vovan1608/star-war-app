@@ -43,15 +43,14 @@ const RandomPlanet = () => {
     return (
         <ErrorBoundary error={isError}>
             <div className="random-planet jumbotron rounded">
-                {isLoading ? <Spinner /> : null}
                 {
-                    !(isLoading || isError) ?
+                    isLoading ?
+                        <Spinner /> :
                         <PlanetView
                             planet={planet}
                             id={planet.id}
                             updatePlanet={updatePlanet}
-                        /> :
-                        null
+                        />
                 }
             </div>
         </ErrorBoundary>
