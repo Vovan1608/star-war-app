@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Spinner from '../spinner';
 
 const WithData = (Component, getData) => {
-    return function F(props) {
+    return function Wrapp(props) {
         const [data, setData] = useState([]);
 
         useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, Children, cloneElement } from 'react';
 
 import Spinner from '../spinner';
 import ErrorBoundary from '../errorBoundary';
@@ -63,7 +63,7 @@ const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
 }
 
 const ItemView = ({ item, image, children }) => {
-    const { gender, birthYear, eyeColor, name } = item;
+    const { name } = item;
 
     return (
         <>
@@ -75,21 +75,9 @@ const ItemView = ({ item, image, children }) => {
             <div className="card-body">
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
-                    {/* <li className="list-group-item">
-                        <span className="term">Gender</span>
-                        <span>{gender}</span>
-                    </li>
-                    <li className="list-group-item">
-                        <span className="term">Birth Year</span>
-                        <span>{birthYear}</span>
-                    </li>
-                    <li className="list-group-item">
-                        <span className="term">Eye Color</span>
-                        <span>{eyeColor}</span>
-                    </li> */}
                     {
-                        React.Children.map(children, (child) => {
-                            return React.cloneElement(child, { item });
+                        Children.map(children, (child) => {
+                            return cloneElement(child, { item });
                         })
                     }
                 </ul>

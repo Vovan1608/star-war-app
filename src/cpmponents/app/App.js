@@ -7,6 +7,14 @@ import RandomPlanet from '../randomPlanet';
 import ErrorBoundary from '../errorBoundary';
 import ItemDetails, { Record } from '../itemDetails';
 import SwapiService from '../../services/swapiService';
+import {
+    PersonList,
+    PlanetList,
+    StarshipList,
+    PersonDetails,
+    PlanetDetails,
+    StarshipDetails
+} from '../starWarComponents';
 
 import './App.css';
 
@@ -27,18 +35,9 @@ const App = () => {
     };
 
     const itemList = (
-        <ItemList
-            getData={getAllPeople}
+        <PersonList
             onItemSelected={onPersonSelected}
-        >
-            {
-                ({
-                    name,
-                    gender,
-                    birthYear
-                }) => `${name} (${gender} ${birthYear})`
-            }
-        </ItemList>
+        />
     );
 
     const personDetails = (
@@ -60,6 +59,22 @@ const App = () => {
                 <RandomPlanet />
 
                 <Row left={itemList} right={personDetails} />
+
+                <PersonDetails itemId={11} />
+                <PlanetDetails itemId={5} />
+                <StarshipDetails itemId={5} />
+
+                <PersonList
+                    onItemSelected={() => { }}
+                />
+                <PlanetList
+                    onItemSelected={() => { }}
+                />
+
+                <StarshipList
+                    onItemSelected={() => { }}
+                />
+
 
             </div>
         </ErrorBoundary>
