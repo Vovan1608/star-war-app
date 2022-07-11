@@ -57,4 +57,11 @@ const ItemList = ({ onPersonSelected, getData, children }) => {
     );
 }
 
-export default ItemList;
+const f = () => {
+    return (props) => {
+        return <ItemList {...props} />;
+    };
+
+}
+
+export default f();

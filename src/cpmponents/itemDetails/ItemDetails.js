@@ -1,11 +1,24 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Spinner from '../spinner';
 import ErrorBoundary from '../errorBoundary';
 
 import './ItemDetails.css';
 
-const ItemDetails = ({ itemId, getData, getImageUrl }) => {
+const Record = ({ item, field, label }) => {
+    return (
+        <li className="list-group-item">
+            <span className="term">{label}</span>
+            <span>{item[field]}</span>
+        </li>
+    );
+};
+
+export {
+    Record
+};
+
+const ItemDetails = ({ itemId, getData, getImageUrl, children }) => {
     const [item, setItem] = useState({});
     const [image, setImage] = useState('');
     const [isError, setIsError] = useState(false);
@@ -42,14 +55,14 @@ const ItemDetails = ({ itemId, getData, getImageUrl }) => {
                 {
                     isLoading ?
                         <Spinner /> :
-                        <ItemView item={item} image={image} />
+                        <ItemView item={item} image={image} children={children} />
                 }
             </div>
         </ErrorBoundary>
     );
 }
 
-const ItemView = ({ item, image }) => {
+const ItemView = ({ item, image, children }) => {
     const { gender, birthYear, eyeColor, name } = item;
 
     return (
@@ -62,7 +75,7 @@ const ItemView = ({ item, image }) => {
             <div className="card-body">
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item">
+                    {/* <li className="list-group-item">
                         <span className="term">Gender</span>
                         <span>{gender}</span>
                     </li>
@@ -73,7 +86,12 @@ const ItemView = ({ item, image }) => {
                     <li className="list-group-item">
                         <span className="term">Eye Color</span>
                         <span>{eyeColor}</span>
-                    </li>
+                    </li> */}
+                    {
+                        React.Children.map(children, (child) => {
+                            return React.cloneElement(child, { item });
+                        })
+                    }
                 </ul>
             </div>
         </>
