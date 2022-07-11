@@ -23,7 +23,6 @@ const RandomPlanet = () => {
         setPlanet({ ...planet });
         setIsLoading(false);
         setImage(swapiService.getPlanetImage(planet));
-        console.log(image);
     };
 
     const getRandom = () => {

@@ -44,28 +44,10 @@ const App = () => {
             itemId={selectedPerson}
             getData={getPersone}
             getImageUrl={getPersonImage}
-        />
-    );
-
-    const elevenPerson = (
-        <ItemDetails
-            itemId={11}
-            getData={getPersone}
-            getImageUrl={getPersonImage}
         >
-            <Record field="gender" label="Gender" />
-            <Record field="eyeColor" label="Eye Color" />
-        </ItemDetails>
-    );
-    const starshipDetails = (
-        <ItemDetails
-            itemId={5}
-            getData={getStarship}
-            getImageUrl={getStarshipImage}
-        >
-            <Record field="model" label="Model" />
-            <Record field="length" label="Length" />
-            <Record field="costInCredits" label="Cost" />
+            <Record field="gender" label="Gender: " />
+            <Record field="eyeColor" label="Eye Color: " />
+            <Record field="birthYear" label="Birth Year: " />
         </ItemDetails>
     );
 
@@ -76,7 +58,6 @@ const App = () => {
 
             <Row left={itemList} right={personDetails} />
 
-            <Row left={elevenPerson} right={starshipDetails} />
         </div>
     );
 };

@@ -4,31 +4,32 @@ import Spinner from '../spinner';
 import ErrorBoundary from '../errorBoundary';
 
 import './ItemList.css';
+import SwapiService from '../../services/swapiService';
 
 const ItemList = ({ onPersonSelected, getData, children }) => {
-    const [isError, setIsError] = useState(false);
-    const [itemList, setPeopleList] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isError, setIsError] = useState(false);
+    // const [itemList, setPeopleList] = useState([]);
+    // const [isLoading, setIsLoading] = useState(true);
 
-    const onError = () => {
-        setIsError(true);
-        setIsLoading(false);
-    };
+    // const onError = () => {
+    //     setIsError(true);
+    //     setIsLoading(false);
+    // };
 
-    const onPeopleLoaded = (itemList) => {
-        setPeopleList(itemList);
-        setIsLoading(false);
-    };
+    // const onPeopleLoaded = (itemList) => {
+    //     setPeopleList(itemList);
+    //     setIsLoading(false);
+    // };
 
-    const updatePeople = () => {
-        getData()
-            .then(onPeopleLoaded)
-            .catch(onError);
-    };
+    // const updatePeople = () => {
+    //     getData()
+    //         .then(onPeopleLoaded)
+    //         .catch(onError);
+    // };
 
-    useEffect(() => {
-        updatePeople();
-    }, []);
+    // useEffect(() => {
+    //     updatePeople();
+    // }, []);
 
     const renderItems = (arr) => {
         return arr.map(({ id, ...item }) => {
@@ -46,22 +47,19 @@ const ItemList = ({ onPersonSelected, getData, children }) => {
         });
     };
 
-    const persons = renderItems(itemList);
+    const items = renderItems(itemList);
 
     return (
         <ErrorBoundary error={isError}>
             <ul className="item-list list-group">
-                {isLoading ? <Spinner /> : persons}
+                {isLoading ? <Spinner /> : items}
             </ul>
         </ErrorBoundary>
     );
 }
 
-const f = () => {
-    return (props) => {
-        return <ItemList {...props} />;
-    };
 
-}
 
-export default f();
+const { getAllPeople } = new SwapiService();
+
+export default WithData(ItemList, getAllPeople);
