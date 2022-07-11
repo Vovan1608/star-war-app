@@ -4,6 +4,7 @@ import Row from '../row';
 import Header from '../header';
 import ItemList from '../itemList';
 import RandomPlanet from '../randomPlanet';
+import ErrorBoundary from '../errorBoundary';
 import ItemDetails, { Record } from '../itemDetails';
 import SwapiService from '../../services/swapiService';
 
@@ -19,6 +20,7 @@ const App = () => {
     } = new SwapiService();
 
     const [selectedPerson, setSelectedPerson] = useState(1);
+    const [isError, setIsErro] = useState(false);
 
     const onPersonSelected = (id) => {
         setSelectedPerson(id);
@@ -26,8 +28,8 @@ const App = () => {
 
     const itemList = (
         <ItemList
-            onPersonSelected={onPersonSelected}
             getData={getAllPeople}
+            onItemSelected={onPersonSelected}
         >
             {
                 ({
@@ -52,13 +54,15 @@ const App = () => {
     );
 
     return (
-        <div>
-            <Header />
-            <RandomPlanet />
+        <ErrorBoundary error={isError}>
+            <div className="stardb-app">
+                <Header />
+                <RandomPlanet />
 
-            <Row left={itemList} right={personDetails} />
+                <Row left={itemList} right={personDetails} />
 
-        </div>
+            </div>
+        </ErrorBoundary>
     );
 };
 

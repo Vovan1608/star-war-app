@@ -1,64 +1,28 @@
-import { useEffect, useState } from 'react';
-
-import Spinner from '../spinner';
-import ErrorBoundary from '../errorBoundary';
-
-import './ItemList.css';
+import WithData from '../hoc-helper/WithData';
 import SwapiService from '../../services/swapiService';
 
-const ItemList = ({ onPersonSelected, getData, children }) => {
-    // const [isError, setIsError] = useState(false);
-    // const [itemList, setPeopleList] = useState([]);
-    // const [isLoading, setIsLoading] = useState(true);
+import './ItemList.css';
 
-    // const onError = () => {
-    //     setIsError(true);
-    //     setIsLoading(false);
-    // };
+const ItemList = ({ onItemSelected, data, children: renderLabel }) => {
+    const items = data.map((item) => {
+        const { id } = item;
+        const label = renderLabel(item);
 
-    // const onPeopleLoaded = (itemList) => {
-    //     setPeopleList(itemList);
-    //     setIsLoading(false);
-    // };
-
-    // const updatePeople = () => {
-    //     getData()
-    //         .then(onPeopleLoaded)
-    //         .catch(onError);
-    // };
-
-    // useEffect(() => {
-    //     updatePeople();
-    // }, []);
-
-    const renderItems = (arr) => {
-        return arr.map(({ id, ...item }) => {
-            const label = children(item);
-
-            return (
-                <li
-                    key={id}
-                    className="list-group-item"
-                    onClick={() => onPersonSelected(id)}
-                >
-                    {label}
-                </li>
-            );
-        });
-    };
-
-    const items = renderItems(itemList);
+        return (
+            <li className="list-group-item"
+                key={id}
+                onClick={() => onItemSelected(id)}>
+                {label}
+            </li>
+        );
+    });
 
     return (
-        <ErrorBoundary error={isError}>
-            <ul className="item-list list-group">
-                {isLoading ? <Spinner /> : items}
-            </ul>
-        </ErrorBoundary>
+        <ul className="item-list list-group">
+            {items}
+        </ul>
     );
 }
-
-
 
 const { getAllPeople } = new SwapiService();
 

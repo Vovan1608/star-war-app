@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import Spinner from '../spinner';
 
 const WithData = (Component, getData) => {
-    return (props) => {
-        const [data, setData] = useState();
+    return function F(props) {
+        const [data, setData] = useState([]);
 
         useEffect(() => {
             getData()
