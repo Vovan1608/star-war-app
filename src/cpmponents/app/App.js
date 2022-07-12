@@ -23,10 +23,7 @@ const App = () => {
 
     const {
         getPersone,
-        getStarship,
-        getAllPeople,
         getPersonImage,
-        getStarshipImage
     } = swapiService;
 
     const [selectedPerson, setSelectedPerson] = useState(1);

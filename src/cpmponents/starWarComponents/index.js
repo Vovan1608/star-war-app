@@ -1,5 +1,7 @@
 import { PersonList, PlanetList, StarshipList } from './ItemList';
-import { PersonDetails, PlanetDetails, StarshipDetails } from './Details';
+import PersonDetails from './PersonDetails';
+import PlanetDetails from './PlanetDetails';
+import StarshipDetails from './StarshipDetails';
 
 export {
     PersonList,
@@ -8,4 +10,4 @@ export {
     PersonDetails,
     PlanetDetails,
     StarshipDetails
-};
+}; 
