@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 
 import Spinner from '../spinner';
 
-const WithData = (Component, getData) => {
+const WithData = (Component) => {
     return function Wrapp(props) {
         const [data, setData] = useState([]);
 
         useEffect(() => {
-            getData()
+            props.getData()
                 .then((data) => {
                     setData(data);
                 });
