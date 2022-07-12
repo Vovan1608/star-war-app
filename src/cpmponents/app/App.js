@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import Row from '../row';
 import Header from '../header';
-import ItemList from '../itemList';
 import RandomPlanet from '../randomPlanet';
 import ErrorBoundary from '../errorBoundary';
 import ItemDetails, { Record } from '../itemDetails';
 import SwapiService from '../../services/swapiService';
+import { SwapiServiceProvider } from '../swapiServiceContext';
 import {
     PersonList,
     PlanetList,
@@ -19,13 +19,15 @@ import {
 import './App.css';
 
 const App = () => {
+    const swapiService = new SwapiService();
+
     const {
         getPersone,
         getStarship,
         getAllPeople,
         getPersonImage,
         getStarshipImage
-    } = new SwapiService();
+    } = swapiService;
 
     const [selectedPerson, setSelectedPerson] = useState(1);
     const [isError, setIsErro] = useState(false);
@@ -54,29 +56,31 @@ const App = () => {
 
     return (
         <ErrorBoundary error={isError}>
-            <div className="stardb-app">
-                <Header />
-                <RandomPlanet />
+            <SwapiServiceProvider value={swapiService}>
+                <div className="stardb-app">
+                    <Header />
+                    <RandomPlanet />
 
-                <Row left={itemList} right={personDetails} />
+                    <Row left={itemList} right={personDetails} />
 
-                <PersonDetails itemId={11} />
-                <PlanetDetails itemId={5} />
-                <StarshipDetails itemId={5} />
+                    <PersonDetails itemId={11} />
+                    <PlanetDetails itemId={5} />
+                    <StarshipDetails itemId={5} />
 
-                <PersonList
-                    onItemSelected={() => { }}
-                />
-                <PlanetList
-                    onItemSelected={() => { }}
-                />
+                    <PersonList
+                        onItemSelected={() => { }}
+                    />
+                    <PlanetList
+                        onItemSelected={() => { }}
+                    />
 
-                <StarshipList
-                    onItemSelected={() => { }}
-                />
+                    <StarshipList
+                        onItemSelected={() => { }}
+                    />
 
 
-            </div>
+                </div>
+            </SwapiServiceProvider>
         </ErrorBoundary>
     );
 };

@@ -94,7 +94,7 @@ export default class SwapiService {
         passengers,
         manufacturer,
         cargoCapacity,
-        costInCredits
+        cost_in_credits
     }) => {
         const id = this._extractId(url);
 
@@ -107,7 +107,7 @@ export default class SwapiService {
             passengers,
             manufacturer,
             cargoCapacity,
-            costInCredits
+            costInCredits: cost_in_credits
         };
     }
 
