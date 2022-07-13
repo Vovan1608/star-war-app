@@ -1,3 +1,5 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import Header from '../header';
 import RandomPlanet from '../randomPlanet';
 import SwapiService from '../../services/swapiService';
@@ -11,14 +13,18 @@ const App = () => {
 
     return (
         <SwapiServiceProvider value={swapiService}>
-            <div className="stardb-app">
-                <Header />
-                <RandomPlanet />
+            <BrowserRouter>
+                <div className="stardb-app">
+                    <Header />
 
-                <PeoplePage />
-                <PlanetPage />
-                <StarshipPage />
-            </div>
+                    <Routes>
+                        <Route path='/' element={<RandomPlanet />} exact />
+                        <Route path='/people' element={<PeoplePage />} />
+                        <Route path='/planets' element={<PlanetPage />} />
+                        <Route path='/starships' element={<StarshipPage />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
         </SwapiServiceProvider>
     );
 };
