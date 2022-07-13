@@ -1,6 +1,6 @@
 import { SwapiServiceConsumer } from '../swapiServiceContext';
 
-const WithSwapiService = (Component, mapMethodsToProps) => {
+const WithSwapiService = (mapMethodsToProps) => (Component) => {
     return function F(props) {
 
         return (

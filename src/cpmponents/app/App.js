@@ -16,9 +16,7 @@ const App = () => {
                 <RandomPlanet />
 
                 <PeoplePage />
-
                 <PlanetPage />
-
                 <StarshipPage />
             </div>
         </SwapiServiceProvider>

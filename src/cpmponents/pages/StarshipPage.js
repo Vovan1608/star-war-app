@@ -4,7 +4,7 @@ import Row from '../row';
 import { StarshipDetails, StarshipList } from '../starWarComponents';
 
 const StarshipPage = () => {
-    const [selectedItem, setSelectedItem] = useState(2);
+    const [selectedItem, setSelectedItem] = useState(5);
 
     const onSelectedItem = (selectedItem) => {
         setSelectedItem(selectedItem);
