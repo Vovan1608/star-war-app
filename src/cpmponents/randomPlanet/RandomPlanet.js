@@ -39,7 +39,11 @@ const RandomPlanet = () => {
     };
 
     useEffect(() => {
-        updatePlanet();
+        let isCanceled = false;
+
+        !isCanceled && updatePlanet();
+
+        return () => isCanceled = true;
     }, []);
 
     return (
