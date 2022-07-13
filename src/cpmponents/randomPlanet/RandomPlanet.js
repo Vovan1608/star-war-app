@@ -20,7 +20,7 @@ const RandomPlanet = () => {
     };
 
     const onPlanetLoaded = (planet) => {
-        setPlanet({ ...planet });
+        setPlanet(planet);
         setIsLoading(false);
         setImage(swapiService.getPlanetImage(planet));
     };
