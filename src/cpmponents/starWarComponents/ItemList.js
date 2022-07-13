@@ -1,12 +1,5 @@
 import ItemList from '../itemList';
-// import SwapiService from '../../services/swapiService';
 import { WithData, WithSwapiService } from '../hoc-helper';
-
-// const {
-//     getAllPeople,
-//     getAllPlanets,
-//     getAllStarships
-// } = new SwapiService();
 
 const WithChildFunction = (Component, fn) => {
     return (props) => {
