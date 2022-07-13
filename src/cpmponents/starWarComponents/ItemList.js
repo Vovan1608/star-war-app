@@ -47,8 +47,6 @@ const StarshipList = compose(
     WithSwapiService(mapStarshipMethodsToProps),
     WithData,
     WithChildFunction(renderName)
-
-
 )(ItemList);
 
 export {
