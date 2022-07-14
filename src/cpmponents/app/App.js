@@ -20,17 +20,17 @@ const App = () => {
 
                     <Routes>
                         <Route path='/' element={<RandomPlanet />} exact />
-                        <Route path='/people' element={<PeoplePage />} exact />
+                        <Route path='/people/' element={<PeoplePage />} exact />
                         <Route
                             path='/people/:id'
                             element={<PersonDetails />}
                         />
-                        <Route path='/planets' element={<PlanetPage />} exact />
+                        <Route path='/planets/' element={<PlanetPage />} exact />
                         <Route
                             path='/planets/:id'
                             element={<PlanetDetails />}
                         />
-                        <Route path='/starships' element={<StarshipPage exact />} />
+                        <Route path='/starships/' element={<StarshipPage exact />} />
                         <Route
                             path='/starships/:id'
                             element={<StarshipDetails />}
