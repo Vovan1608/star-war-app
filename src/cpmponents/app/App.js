@@ -5,6 +5,7 @@ import RandomPlanet from '../randomPlanet';
 import SwapiService from '../../services/swapiService';
 import { SwapiServiceProvider } from '../swapiServiceContext';
 import { PeoplePage, PlanetPage, StarshipPage } from '../pages';
+import { StarshipDetails, PersonDetails, PlanetDetails } from '../starWarComponents';
 
 import './App.css';
 
@@ -19,9 +20,21 @@ const App = () => {
 
                     <Routes>
                         <Route path='/' element={<RandomPlanet />} exact />
-                        <Route path='/people' element={<PeoplePage />} />
-                        <Route path='/planets' element={<PlanetPage />} />
-                        <Route path='/starships' element={<StarshipPage />} />
+                        <Route path='/people' element={<PeoplePage />} exact />
+                        <Route
+                            path='/people/:id'
+                            element={<PersonDetails />}
+                        />
+                        <Route path='/planets' element={<PlanetPage />} exact />
+                        <Route
+                            path='/planets/:id'
+                            element={<PlanetDetails />}
+                        />
+                        <Route path='/starships' element={<StarshipPage exact />} />
+                        <Route
+                            path='/starships/:id'
+                            element={<StarshipDetails />}
+                        />
                     </Routes>
                 </div>
             </BrowserRouter>

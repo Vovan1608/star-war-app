@@ -1,17 +1,21 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './ItemList.css';
 
 const ItemList = ({ onItemSelected = () => { }, data, children: renderLabel }) => {
     const items = data.map((item) => {
-        const { id } = item;
+        const { id, category } = item;
         const label = renderLabel(item);
 
         return (
             <li className="list-group-item"
                 key={id}
-                onClick={() => onItemSelected(id)}>
-                {label}
+                onClick={() => onItemSelected(id)}
+            >
+                <Link to={`/${category}/${id}`} >
+                    {label}
+                </Link>
             </li>
         );
     });

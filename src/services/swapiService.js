@@ -75,11 +75,13 @@ export default class SwapiService {
         rotation_period
     }) => {
         const id = this._extractId(url);
+        const category = 'planets';
 
         return {
             id,
             name,
             diameter,
+            category,
             population,
             rotationPeriod: rotation_period,
         }
@@ -97,6 +99,7 @@ export default class SwapiService {
         cost_in_credits
     }) => {
         const id = this._extractId(url);
+        const category = 'starships';
 
         return {
             id,
@@ -104,6 +107,7 @@ export default class SwapiService {
             crew,
             model,
             length,
+            category,
             passengers,
             manufacturer,
             cargoCapacity,
@@ -119,11 +123,13 @@ export default class SwapiService {
         birth_year
     }) => {
         const id = this._extractId(url);
+        const category = 'people';
 
         return {
             id,
             name,
             gender,
+            category,
             eyeColor: eye_color,
             birthYear: birth_year
         };

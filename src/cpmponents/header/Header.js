@@ -7,7 +7,7 @@ const Header = () => {
         <div className="header d-flex">
             <h3>
                 <Link to="/">
-                    Star DB
+                    HOME
                 </Link>
             </h3>
             <ul className="d-flex">
